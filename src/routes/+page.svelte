@@ -1,1 +1,1 @@
-<h1>soon</h1>
+<h1>soon&trade;</h1>
