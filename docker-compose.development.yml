@@ -1,0 +1,25 @@
+services:
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    volumes:
+      - ./.data/mongodb/db:/data/db
+      - ./.data/mongodb/configdb:/data/configdb
+    networks:
+      - internal
+
+  api:
+    image: ghcr.io/vulpark/vulpark:main
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    environment:
+      DB_URL: mongodb://mongo:mongo@mongo:27017/vulpark
+    networks:
+      - internal
+
+networks:
+  internal: {}
